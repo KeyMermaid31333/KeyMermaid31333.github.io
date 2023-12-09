@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>&zwnj;</title>
+        <!--edi2t but gamer-->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAH0lEQVQ4T2NkoBAwUqifYdQAhtEwYBgNA1A+Gvi8AAAmmAARf9qcXAAAAABJRU5ErkJggg=="/>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+            p{
+                margin: 2px;
+            }
+            div{
+                margin-bottom: 20px;
+            }
+            input{
+                margin-bottom: 20px;
+            }
+            body{
+                margin: 0px;
+                padding: 0px;
+                border-bottom: 1px solid rgba(1,1,1,0);
+                background-color: rgb(10,10,10);
+            }
+            .container{
+                margin-top: 30vh;
+                margin-left: auto;
+                margin-right: auto;
+                width: max-content;
+                text-align: center;
+            }
+            .container>p{
+                color:#fff;
+                font-size: 2.5em;
+                font-family: sans-serif;
+            }
+            .container>div>p{
+                color: #fff;
+                font-family: sans-serif;
+            }
+            #subs{
+                text-align: left;
+                font-size: 1em;
+                font-family: 'Changa', sans-serif;
+            }
+            #iinfo,#minfo{text-align:left;}
+            ul{
+                margin: 5px;
+                padding-left: 3vw;
+                text-align: left;
+                color: #fff;
+                font-family: sans-serif;
+                list-style: none;
+            }
+            .mlist>a{
+                color: #fff;
+                transition: color .2s;
+                display: block;
+                width: max-content;
+                margin-left: 3vw;
+                font-family: sans-serif;
+                text-decoration: none;
+            }
+            .mlist>a:hover{
+                color: rgb(100,100,100);
+            }
+            body>div>input{
+                color: #fff;
+                background-color: transparent;
+                border: 0px;
+                font-size: 1.1em;
+                border-bottom: 1px solid rgba(1,1,1,0);
+                font-family: 'Changa', 'sans-serif';
+            }
+            body>div>input:focus{
+                animation-name: onFocus;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+            }
+            body>div>input:focus,body>div>button:focus{
+                outline: none;
+            }
+            body>div>button{
+                color: #fff;
+                background-color: transparent;
+                border: 0px;
+                font-size: 1.1em;
+            }
+            form {
+                display: flex;
+                justify-content: center;
+            }
+            
+            form input {
+                background: none;
+                font-family: 'Roboto';
+                padding: 0px 17px;
+                height: 48px;
+                border: 1px solid  rgb(255, 255, 255, .2);
+                color: var(--text-color);
+                border-radius: 3px;
+                outline: none;
+                width: 350px;
+                margin-top: 5px;
+                border-radius: 50px;
+                color: #FFF;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <p id="titl">node</p>
+            <form>
+                <input id="nplc" placeholder="Search the web">
+            </form>
+        </div>
+        <script src="uv.bundle.js"></script>
+        <script src="uv.config.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
