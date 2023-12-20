@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/uv/',
-    bare: 'https://shuttle.cf/bare/',
+    bare: 'https://bare.tiwhosts.me',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: "../uv/uv.handler.js",
