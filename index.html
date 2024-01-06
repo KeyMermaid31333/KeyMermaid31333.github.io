@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Echo Static</title>
+  <link rel="icon" type="image/x-icon" href="https://github.com/MathDevz/chatapp/blob/main/Echo.png?raw=true">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    input[type="text"], button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+
+    #message-input {
+      width: 60%;
+      transition: width 0.3s ease-in-out;
+      background-color: #181818; /* Grey background color */
+      color: white;
+    }
+
+    #message-input:focus {
+      width: 80%; /* Extend width when focused */
+    }
+
+    button {
+      background-color: #000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #181818;
+      transform: scale(1.05);
+    }
+
+    #chat-box {
+      height: 300px;
+      border: 1px solid #ccc;
+      overflow-y: scroll;
+      padding: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .message {
+      opacity: 0;
+      animation: fadeInMessage 0.5s ease-in-out forwards;
+    }
+
+    .message:hover {
+      transform: scale(1.05);
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    #image-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 3px;
+    }
+
+    #echo-image {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* Styles for the Clear Chat button */
+    #clear-chat-button {
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    #clear-chat-button:hover {
+      background-color: #181818;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInMessage {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div id="image-container">
+    <img id="echo-image" src="https://github.com/MathDevz/chatapp/blob/main/Echo.png?raw=true" alt="Echo Image">
+  </div>
+
+  <input type="text" id="message-input" placeholder="Type a message..." style="margin-bottom: 10px;" onkeydown="handleKeyDown(event)">
+  <button onclick="sendMessage()" class="send-button">Send</button>
+  <button onclick="clearChat()" id="clear-chat-button">Clear Chat</button>
+  <div id="chat-box"></div>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const messageInput = document.getElementById('message-input');
+
+    function displayMessages() {
+      chatBox.innerHTML = '';
+
+      const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+      messages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = `${message.user}: ${message.text}`;
+        chatBox.appendChild(messageElement);
+      });
+    }
+
+    displayMessages();
+
+    function clearChat() {
+      localStorage.removeItem('chatMessages');
+      displayMessages();
+    }
+
+    setInterval(displayMessages, 5000);
+
+    function sendMessage() {
+      const message = messageInput.value;
+      if (message.trim() !== '') {
+        const currentUser = 'User'; // Replace 'User' with the current user's name or identifier
+
+        const existingMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+        const newMessage = {
+          user: currentUser,
+          text: message
+        };
+        existingMessages.push(newMessage);
+
+        localStorage.setItem('chatMessages', JSON.stringify(existingMessages));
+
+        displayMessages();
+        messageInput.value = '';
+      }
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    // Canvas and animation related scripts
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        opacity: Math.random(),
+      });
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    function updateStars() {
+      for (const star of stars) {
+        star.opacity += 0.005;
+        if (star.opacity > 1) {
+          star.opacity = 0;
+        }
+      }
+    }
+
+    function animate() {
+      drawStars();
+      updateStars();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
