@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palladium HQ</title>
+  <link rel="stylesheet" type="text/css" href="/main/style.css">
+  <link rel="icon" type="image/x-icon" href="https://github.com/nlgg3r1234hfh/MathDevz/blob/main/main/image.png?raw=true">
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2352837174393946" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* Add this line to disable pointer events for the canvas */
+    }
+  </style>
+</head>
+<body>
+  <div class="snowflakes"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <header>
+    <h1>Palladium HQ</h1>
+  </header>
+
+  <nav>
+    <a href="/main/Home.html">Home</a>
+    <a href="/main/search.html">Proxy</a>
+    <a href="/main/Apps.html">Apps</a>
+    <a href="/main/Games.html">Games</a>
+    <a href="/main/Services.html">Services</a>
+    <a href="/main/settings.html">Settings</a>
+  </nav>
+
+  <section>
+    <center><h2>Welcome to Palladium HQ</h2>
+    <p>This is an experimental site, do not rely on anything working, thanks</p></center>
+  </section>
+  <script>
+    const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const numParticles = 100;
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = 0;
+            this.radius = Math.random() * 5 + 1;
+            this.speed = Math.random() * 5 + 1;
+            this.opacity = Math.random() * 0.5 + 0.5;
+            this.color = `rgba(148, 87, 235, ${Math.random()})`; // Shades of purple
+
+            this.update = () => {
+                this.y += this.speed;
+
+                if (this.y > canvas.height) {
+                    this.y = 0;
+                    this.x = Math.random() * canvas.width;
+                }
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            };
+        }
+
+        function createParticles() {
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        createParticles();
+        animateParticles();
+// Function to create a particles
+  </script>
+</body>
+</html>
